@@ -1,4 +1,4 @@
-#!/Users/praxsmbp2/Downloads/Juggernot/baani-backend/terminal-assistant-chat/.venv/bin/python3.11
+#!/Users/praxsmbp2/Downloads/Juggernot/baani-backend/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
