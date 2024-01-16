@@ -5,6 +5,7 @@ import json
 from tools import tools
 from function.dalle_executor import generate_image
 from function.linkedin_executor import make_post_linkedin
+from function.twitter_executor import make_post_twitter
 from interface.terminal import pretty_print_conversation
 load_dotenv()
 client=openai
@@ -16,7 +17,8 @@ def execute_function(function_name, tool_call):
     available_functions = {
         "add_numbers": add_numbers,
         "generate_image": generate_image,
-        "make_post_linkedin": make_post_linkedin
+        "make_post_linkedin": make_post_linkedin,
+        "make_post_twitter": make_post_twitter
     }
     if function_name: 
         if function_name=="add_numbers":
@@ -41,6 +43,13 @@ def execute_function(function_name, tool_call):
                             text=function_args.get("linkedin_post"),
                         )
                         pretty_print_conversation(messages=None, message=function_args.get("linkedin_post"))
+        if function_name=="make_post_twitter":
+                        function_to_call = available_functions[function_name]
+                        function_args = json.loads(tool_call.function.arguments)
+                        function_response = function_to_call(
+                            text=function_args.get("twitter_post"),
+                        )
+                        pretty_print_conversation(messages=None, message=function_args.get("twitter_post"))
         return function_response
     else:
         return f"function {function_name} not available for calling"
