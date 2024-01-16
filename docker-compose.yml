@@ -1,0 +1,17 @@
+services:
+  bot:
+    build: .
+    environment:
+      - OPENAI_API_KEY
+      - TG_API_KEY
+      - TG_USER_ACCESS
+      - OPENAI_MODEL
+    volumes:
+      # uncomment for development
+      # - ${PWD}:/app:ro
+      - ${PWD}/files:/app/files:rw
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
